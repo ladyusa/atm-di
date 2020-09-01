@@ -1,7 +1,5 @@
 package atm;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,35 +7,35 @@ import java.util.Map;
  */
 public class Bank {
 
+   private String name;
    private Map<Integer,Customer> customers;
-   private DataSource dataSource;
+   private DataSourceDB dataSource;
 
    /**
     * Constructs a bank with no customers.
     */
-   public Bank(DataSource dataSource) {
+   public Bank(String name, DataSourceDB dataSource) {
+      this.name = name;
       this.dataSource = dataSource;
-      customers = new HashMap<Integer,Customer>();
+      this.customers = dataSource.readCustomers();
    }
 
-   public void initializeCustomers() throws IOException {
-      customers = dataSource.readCustomers();
-   }
    /**
     * Adds a customer to the bank.
     * @param c the customer to add
     */
    public void addCustomer(Customer c) {
-      customers.put(c.getCustomerNumber(), c);
+      customers.put(c.getId(), c);
    }
-   
-   /** 
+
+   /**
     * Finds a customer in the bank.
     * @param number a customer number
     * @return the matching customer, or null if no customer
     * matches
     */
    public Customer findCustomer(int number) {
-	  return customers.get(number);
+      return customers.get(number);
    }
 }
+
