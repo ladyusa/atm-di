@@ -9,12 +9,12 @@ public class Bank {
 
    private String name;
    private Map<Integer,Customer> customers;
-   private DataSourceDB dataSource;
+   private DataSourceFile dataSource;
 
    /**
     * Constructs a bank with no customers.
     */
-   public Bank(String name, DataSourceDB dataSource) {
+   public Bank(String name, DataSourceFile dataSource) {
       this.name = name;
       this.dataSource = dataSource;
       this.customers = dataSource.readCustomers();
